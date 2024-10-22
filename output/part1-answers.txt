@@ -1,0 +1,51 @@
+q1,3
+q2,True
+q3a,False
+q4,['Université PSL', 'University of Southampton', "King's College London", 'Sungkyunkwan University(SKKU)', 'Columbia University']
+q5a,[100, 100, 100, 100, 100, 100, 100, 100]
+q5b,[100, 100, 100, 100, 100, 100, 100, 100]
+q5c,100
+q6c,1
+q7,[9, 9, 9]
+q8a,29
+q9,[67.041, 67.68, 73.539, 82.147, 75.504]
+q10,5
+q11,academic reputation       82.25
+employer reputation       75.30
+faculty student          100.00
+citations per faculty     95.95
+overall score             91.80
+Name: Singapore, dtype: float64
+q12,('Singapore', 'France')
+q13,output/13a.png
+q14a,output/14a.png
+q15,(10, 4)
+q16,Index(['university', 'overall score 2019', 'overall score 2020',
+       'overall score 2021'],
+      dtype='object')
+q17,output/17a.png
+q18,output/18.png
+q20a,None
+q20b,27       University of California, Berkeley (UCB)
+0     Massachusetts Institute of Technology (MIT)
+71                Georgia Institute of Technology
+70                               Osaka University
+69                         Universiti Malaya (UM)
+68               National Taiwan University (NTU)
+67                       University of Washington
+66                          University of Glasgow
+65          Ruprecht-Karls-Universität Heidelberg
+64                  University of Texas at Austin
+Name: university, dtype: object
+q21,1                                   Stanford University
+2                                    Harvard University
+3                                  University of Oxford
+4          California Institute of Technology (Caltech)
+5     ETH Zurich - Swiss Federal Institute of Techno...
+6                               University of Cambridge
+7                                                   UCL
+8                               Imperial College London
+9                                 University of Chicago
+11               National University of Singapore (NUS)
+Name: university, dtype: object
+PART 1,0
