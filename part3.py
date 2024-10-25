@@ -289,7 +289,7 @@ def q8():
     h.add_pipeline("shell", pipeline_shell)
     h.add_pipeline( "pandas", pipeline_pandas)
     latencies_adj = h.compare_latency()
-    # divide by size to get latency
+    # divide by size to get latency since there's no latency specific function
     size = pipeline_shell()
     latencies = [(x / size) for x in latencies_adj]
     # return tuple instead of list

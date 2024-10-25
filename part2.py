@@ -524,7 +524,7 @@ Create four pipelines,
 based on the three datasets above.
 Each should call your population_pipeline from Q7.
 """
-
+#creating pipelines which each create a df of the right size and run the pipeline on it
 def baseline_small():
     df = load_input_small()
     return(population_pipeline(df))
@@ -573,6 +573,7 @@ POPULATION_SMALL = pd.read_csv('data/population.csv').head(600)
 POPULATION_MEDIUM = pd.read_csv('data/population.csv').head(6000)
 POPULATION_LARGE = pd.read_csv('data/population.csv')
 POPULATION_SINGLE_ROW = pd.read_csv('data/population.csv').head(1)
+
 
 def fromvar_small():
     return(population_pipeline(POPULATION_SMALL))

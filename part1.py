@@ -518,7 +518,7 @@ def q10_helper(dfs):
     # Enter code here
     df = dfs[2]
 
-    # Placeholder for the avg_2021 dataframe
+    
     # group by region, index on attributes, then take mean 
     avg_2021 = df.groupby('region')[['academic reputation', 'employer reputation', 'faculty student', 'citations per faculty', 'overall score']].mean()
 
@@ -744,16 +744,20 @@ def q17a(top_10):
     # choosing a line graph with the years as the axis and the y axis as the overall score
     # different lines representing the different universities 
     # i chose this because it would be the best way to display many different universities on the same plot
+    # clearing prev plots
     plt.clf()
+    # transforming data to be longer so it's easier to graph
     top_10_long = top_10.melt(id_vars = 'university', var_name = 'year', value_name = 'scores')
     for university in top_10_long['university'].unique():
         subset = top_10_long[top_10_long['university'] == university]
         plt.plot(subset['year'], subset['scores'], marker='o', label=university)
+    # adding labels
     plt.xticks([1, 2, 3], ['2021', '2022', '2023'])  # Assuming Score 1 is 2021, Score 2 is 2022, etc.
     plt.xlabel('Year')
     plt.ylabel('Overall Score')
     plt.title('Overall Scores of T10 Universities From 2019-2021')
     plt.legend(bbox_to_anchor=(1, 1))
+    # saving figure 
     plt.savefig('output/17a.png', bbox_inches='tight')
     plt.close()
     return("output/17a.png")
@@ -801,9 +805,11 @@ def q18(dfs):
     corr_matrix= df.corr()
     # plotting matrix 
     plt.matshow(corr_matrix, cmap='coolwarm', fignum=1)
+    # adding labels
     plt.title('Correlation Matrix')
     plt.xticks(range(len(corr_matrix.columns)), corr_matrix.columns, rotation=45)
     plt.yticks(range(len(corr_matrix.index)), corr_matrix.index)
+    # saving matrix
     plt.savefig('output/18.png', bbox_inches='tight')
     print(corr_matrix)
     return "output/18.png"
