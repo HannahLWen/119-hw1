@@ -582,11 +582,10 @@ def q12a(avg_2021):
     return ("Singapore", "France")
 
 def q12a_helper(dfs):
-    # getting the mean of rank for each year, then sorting to find the top ranked regions 
+    # getting the mean of rank for each year except 2020, then sorting to find the top ranked regions 
     avg_2019 = dfs[0].groupby('region')[['rank']].mean().sort_values(by="rank", ascending = True)
-    avg_2020 = dfs[1].groupby('region')[['rank']].mean().sort_values(by="rank", ascending = True)
     avg_2021 = dfs[2].groupby('region')[['rank']].mean().sort_values(by="rank", ascending = True)
-    return (avg_2019, avg_2020, avg_2021)
+    return (avg_2019, avg_2021)
 
 """
 12b.

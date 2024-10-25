@@ -39,6 +39,9 @@ convert it to an integer and return it. You should get "12345".
 
 # You may need to conda install requests or pip3 install requests
 import requests
+# also importing subprocess and os 
+import subprocess
+import os
 
 def download_file(url, filename):
     r = requests.get(url)
@@ -46,25 +49,37 @@ def download_file(url, filename):
         f.write(r.content)
 
 def clone_repo(repo_url):
-    # TODO
-    raise NotImplementedError
+    # run shell command with subprocess, cloning repo
+    try: 
+        subprocess.run(['git', 'clone', repo_url], check=True)
+
+    except:
+        print("Already Cloned")
 
 def run_script(script_path, data_path):
-    # TODO
-    raise NotImplementedError
+    # try running script
+    subprocess.run(['python', script_path, data_path], check=True)
 
 def setup(repo_url, data_url, script_path):
-    # TODO
-    raise NotImplementedError
+    # download data through url 
+    download_file(data_url, 'output/test-output.txt')
+    # clone repo
+    clone_repo(repo_url)
+    # run script
+    run_script(script_path, 'output/test-output.txt')
 
 def q1():
     # Call setup as described in the prompt
-    # TODO
+    setup(
+        "https://github.com/DavisPL-Teaching/119-hw1",
+        "https://raw.githubusercontent.com/DavisPL-Teaching/119-hw1/refs/heads/main/data/test-input.txt",
+        "test-script.py"
+    )
     # Read the file test-output.txt to a string
-    # TODO
+    with open('output/test-output.txt', 'r') as file:
+        file_content = file.read().strip()
     # Return the integer value of the output
-    # TODO
-    raise NotImplementedError
+    return(int(file_content))
 
 """
 2.
@@ -77,11 +92,16 @@ this scenario?
 
 === ANSWER Q2a BELOW ===
 
+You may want a script like that to automate the process so it's easier to re-run script. 
+You may even set it to run automatically every 2 weeks.
+
 === END OF Q2a ANSWER ===
 
 Do you see an alternative to using a script like setup()?
 
 === ANSWER Q2b BELOW ===
+
+Maybe you could directly call functions like subprocess instead of calling other functions which run it. 
 
 === END OF Q2b ANSWER ===
 
@@ -121,19 +141,21 @@ Hint: use subprocess again!
 Hint: search for "import" in parts 1-3. Did you miss installing
 any packages?
 """
-
+# need to import pandas, pytest, matplotlib.pyplot, time, subprocess, requests, os
 def setup_for_new_machine():
-    # TODO
-    raise NotImplementedError
+    # installing the packages specifically which are typically include with python 
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'pytest'])
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'subprocess'])
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'requests'])
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'matplotlib'])
+    
 
 def q3():
     # As your answer, return a string containing
     # the operating system name that you assumed the
     # new machine to have.
-    # TODO
-    raise NotImplementedError
-    # os =
-    return os
+    # 
+    return("macOS")
 
 """
 4. This question is open ended :)
@@ -145,6 +167,9 @@ scripts like setup() and setup_for_new_machine()
 in their day-to-day jobs?
 
 === ANSWER Q4 BELOW ===
+
+I feel like real data scientists spend a small percentage of their time setting up scripts like setup() because
+I feel like they would have standardized it or have other measure to make the process quicker.
 
 === END OF Q4 ANSWER ===
 
@@ -207,20 +232,27 @@ Hints:
 """
 
 def pipeline_shell():
-    # TODO
-    raise NotImplementedError
+    # getting contents of csv
+    # did not need tail to skip header 
+    count = os.popen("cat data/population.csv | wc -l").read().strip()
     # Return resulting integer
+    return(int(count))
 
 def pipeline_pandas():
-    # TODO
-    raise NotImplementedError
-    # Return resulting integer
+    # read csv then return number of rows
+    df = pd.read_csv('data/population.csv')
+    # Return the number of rows in the DataFrame
+    return len(df)
 
 def q6():
     # As your answer to this part, check that both
     # integers are the same and return one of them.
-    # TODO
-    raise NotImplementedError
+    shell_int = pipeline_shell()
+    pipe_int = pipeline_pandas()
+    if shell_int == pipe_int:
+        return(shell_int)
+    else: 
+        return(False)
 
 """
 Let's do a performance comparison between the two methods.
@@ -236,8 +268,13 @@ def q7():
     # Return a tuple of two floats
     # throughput for shell, throughput for pandas
     # (in rows per second)
-    # TODO
-    raise NotImplementedError
+    h = part2.ThroughputHelper()
+    # Add the 2 pipelines
+    h.add_pipeline("shell", pipeline_pandas(), pipeline_shell)
+    h.add_pipeline( "pandas", pipeline_pandas(),pipeline_pandas)
+    throughputs = h.compare_throughput()
+    # return tuple instead of list
+    return(tuple(throughputs))
 
 """
 8. Latency
@@ -247,8 +284,16 @@ def q8():
     # Return a tuple of two floats
     # latency for shell, latency for pandas
     # (in milliseconds)
-    # TODO
-    raise NotImplementedError
+    h = part2.LatencyHelper()
+    # Add the 2 pipelines
+    h.add_pipeline("shell", pipeline_shell)
+    h.add_pipeline( "pandas", pipeline_pandas)
+    latencies_adj = h.compare_latency()
+    # divide by size to get latency
+    size = pipeline_shell()
+    latencies = [(x / size) for x in latencies_adj]
+    # return tuple instead of list
+    return(tuple(latencies))
 
 """
 9. Which method is faster?
@@ -256,8 +301,13 @@ Comment on anything else you notice below.
 
 === ANSWER Q9 BELOW ===
 
+It appears that the shell pipeline is faster.
+I was surprised to see that the shell pipeline was considerably faster in terms of performance.
+
 === END OF Q9 ANSWER ===
 """
+
+
 
 """
 ===== Wrapping things up =====

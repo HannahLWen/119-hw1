@@ -1,7 +1,7 @@
 q1,3
 q2,True
 q3a,False
-q4,['Université PSL', 'University of Southampton', "King's College London", 'Sungkyunkwan University(SKKU)', 'Columbia University']
+q4,['National Taiwan University (NTU)', 'The University of Queensland', 'Georgia Institute of Technology', 'The University of Sheffield', 'Sorbonne University']
 q5a,[100, 100, 100, 100, 100, 100, 100, 100]
 q5b,[100, 100, 100, 100, 100, 100, 100, 100]
 q5c,100
@@ -48,4 +48,3 @@ q21,1                                   Stanford University
 9                                 University of Chicago
 11               National University of Singapore (NUS)
 Name: university, dtype: object
-PART 1,0
