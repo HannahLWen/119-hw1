@@ -232,9 +232,8 @@ Hints:
 """
 
 def pipeline_shell():
-    # getting contents of csv
-    # did not need tail to skip header 
-    count = os.popen("cat data/population.csv | wc -l").read().strip()
+    # getting contents of csv 
+    count = os.popen("cat data/population.csv | tail -n +2 | wc -l ").read().strip() # adding new blank line to csv
     # Return resulting integer
     return(int(count))
 
